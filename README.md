@@ -2,7 +2,7 @@
 
 ## Project setup
 - `npm i`
-- Create a new file called `firebaseConfig.js`
+- Create a new file called `firebaseConfig.js` in the base directory of the proyect.
 - Insert your staging firebase configs into that file. 
 `export const firebaseConfig = {
     apiKey: "API_KEY",
