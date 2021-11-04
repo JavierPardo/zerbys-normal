@@ -1,10 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { auth } from "../firebase";
-import { setUser, setUserId } from "../redux/actions/userActions";
-import routes from "../routes";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../services/firebase";
+import { setUserId } from "../../../redux/actions/userActions";
 
 export function SignIn() {
   const [credentials, setCredentials] = useState({
@@ -26,13 +24,12 @@ export function SignIn() {
         dispatch(setUserId(user.uid));
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        console.error(error.code);
       });
   }
 
   function signInByUsernameAndPassword() {
-    return new Promise(function (res, rej) {
+    return new Promise(function (res) {
       dispatch(setUserId("asdasdad"));
       res();
     });

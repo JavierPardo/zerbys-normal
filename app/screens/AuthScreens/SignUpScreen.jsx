@@ -1,15 +1,16 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { StyleSheet, View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
-import useSignUp from "../../app/useSignUp";
+import useSignUp from "../../js/screens/useSignUp";
 import { containers, controls } from "../../styles";
 
-export function SignUpScreenUI({
-  email,
-  password,
+export function SignUpScreen({
   onSignUpPressed,
   onCancelPressed,
   onCredentialsChanged,
+  email,
+  password,
 }) {
   return (
     <View style={containers.formContainer}>
@@ -38,7 +39,7 @@ export function SignUpScreenUI({
 
 export default function (props) {
   const signIn = useSignUp(props);
-  return <SignUpScreenUI {...signIn} />;
+  return <SignUpScreen {...signIn} />;
 }
 
 const styles = StyleSheet.create({
@@ -48,3 +49,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+SignUpScreen.propTypes = {
+  onSignUpPressed: PropTypes.func,
+  onCancelPressed: PropTypes.func,
+  onCredentialsChanged: PropTypes.func,
+  email: PropTypes.string,
+  password: PropTypes.string,
+};

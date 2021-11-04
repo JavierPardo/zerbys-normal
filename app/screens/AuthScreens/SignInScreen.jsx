@@ -1,10 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import PropTypes from "prop-types";
+import { StyleSheet, View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
-import useSignIn from "../../app/useSignIn";
+import useSignIn from "../../js/screens/useSignIn";
 import { containers, controls } from "../../styles";
 
-export function SignInScreenUI({
+export function SignInScreen({
   onCancelPressed,
   onSignInPressed,
   onCredentialsChanged,
@@ -38,7 +39,7 @@ export function SignInScreenUI({
 
 export default function () {
   const signIn = useSignIn();
-  return <SignInScreenUI {...signIn} />;
+  return <SignInScreen {...signIn} />;
 }
 
 const styles = StyleSheet.create({
@@ -52,3 +53,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+SignInScreen.propTypes = {
+  onCancelPressed: PropTypes.func,
+  onSignInPressed: PropTypes.func,
+  onCredentialsChanged: PropTypes.func,
+  identifier: PropTypes.string,
+  password: PropTypes.string,
+};

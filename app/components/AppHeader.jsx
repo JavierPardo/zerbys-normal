@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Appbar, Menu } from "react-native-paper";
-import useAppHeader from "./useAppHeader";
+import useAppHeader from "../js/components/useAppHeader";
 
 function AppHeader() {
   const { onLogOutPressed } = useAppHeader();
@@ -12,8 +12,6 @@ function AppHeader() {
 
   return (
     <Appbar.Header>
-      <Appbar.Content title="Profile" />
-      <Appbar.Action icon="magnify" />
       <Menu
         visible={visible}
         onDismiss={closeMenu}

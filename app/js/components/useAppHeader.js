@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { clearUser } from "../redux/actions/userActions";
+import { clearUser } from "../../../redux/actions/userActions";
 
 //navigation action only
 export default function () {

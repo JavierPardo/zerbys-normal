@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import routes from "../routes";
+import routes from "../../routes";
 
 export function Home() {
   return {};

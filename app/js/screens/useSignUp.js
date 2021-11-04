@@ -1,10 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { auth, firestore } from "../firebase";
-import { userModel } from "../models/userModel";
-import { setUser, setUserId } from "../redux/actions/userActions";
-import routes from "../routes";
+import { auth, firestore } from "../../services/firebase";
+import { userModel } from "../../models/userModel";
+import { setUserId } from "../../../redux/actions/userActions";
 
 export function SignUp() {
   const [credentials, setCredentials] = useState({
@@ -30,9 +29,7 @@ export function SignUp() {
         dispatch(setUserId(user.uid));
       })
       .catch((error) => {
-        console.log(error);
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        console.error(error.code);
       });
   }
 

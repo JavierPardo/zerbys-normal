@@ -1,24 +1,17 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { View } from "react-native";
 import { Text } from "react-native-paper";
 import AppHeader from "../../components/AppHeader";
 
-function ProfileScreenUI(props) {
-  const { user } = props;
-
+function InboxScreen() {
   return (
     <View>
       <AppHeader />
       <View style={{ flexDirection: "row" }}>
-        <Text>Name:</Text>
-        {user && <Text>{user.name}</Text>}
+        <Text>INBOX</Text>
       </View>
     </View>
   );
 }
-ProfileScreenUI.propTypes = {
-  user: PropTypes.obj,
-};
 
-export default ProfileScreenUI;
+export default InboxScreen;
