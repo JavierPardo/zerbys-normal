@@ -6,13 +6,16 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Provider as StoreProvider } from 'react-redux';
 import { store } from './redux';
+import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
 
   return (
     <PaperProvider>
       <StoreProvider store={store}>
-        <RootStack />
+        <NavigationContainer>
+          <RootStack />
+        </NavigationContainer>
       </StoreProvider>
     </PaperProvider>
   );
