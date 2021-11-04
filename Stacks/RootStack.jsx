@@ -1,28 +1,19 @@
-import React, { useEffect } from 'react'
-import { StyleSheet } from 'react-native'
-import { useSelector } from 'react-redux';
-import { setUser } from '../redux/actions/userActions';
-import AppStack from './AppStack';
-import AuthStack from './AuthStack';
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { setUser } from "../redux/actions/userActions";
+import AppStack from "./AppStack";
+import AuthStack from "./AuthStack";
+import { useDispatch } from "react-redux";
 
-export default function () {
+function RootStack() {
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
-    const user = useSelector(state => state.user)
-    const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(setUser({ userId: "testID" }));
+  }, [dispatch]);
 
-    useEffect(function () {
-        dispatch(setUser({userId: 'asdasdafdasdf'}))
-    }, [])
-
-
-    if (user.userId) {
-        return <AppStack />
-    }
-    else {
-        return (
-            <AuthStack />
-        )
-    }
+  return user.userId ? <AppStack /> : <AuthStack />;
 }
 
-const styles = StyleSheet.create({})
+export default RootStack;

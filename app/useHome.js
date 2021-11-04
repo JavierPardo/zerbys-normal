@@ -4,28 +4,28 @@ import routes from "../routes";
 
 export function Home() {
 
-    return {}
+  return {};
 }
 
 //navigation action only
 export default function () {
 
-    const { ...props } = Home();
+  const { ...props } = Home();
 
-    const navigation = useNavigation();
+  const navigation = useNavigation();
 
-    function signInPressHandler() {
-        navigation.navigate(routes.public.signIn)
-    }
+  function signInPressHandler() {
+    navigation.navigate(routes.public.signIn);
+  }
 
-    function signUpPressHandler() {
-        navigation.navigate(routes.public.signUp);
-    }
+  function signUpPressHandler() {
+    navigation.navigate(routes.public.signUp);
+  }
 
-    return {
-        onSignInPressed: signInPressHandler,
-        onSignUpPressed: signUpPressHandler,
-        ...props
-    }
+  return {
+    onSignInPressed: signInPressHandler,
+    onSignUpPressed: signUpPressHandler,
+    ...props
+  };
 
 }

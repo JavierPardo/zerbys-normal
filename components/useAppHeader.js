@@ -5,16 +5,16 @@ import { clearUser } from "../redux/actions/userActions";
 //navigation action only
 export default function () {
 
-    const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-    function logOutPressHandler() {
-        dispatch(clearUser());
-    }
+  function logOutPressHandler() {
+    dispatch(clearUser());
+  }
 
 
-    return {
-        onLogOutPressed: logOutPressHandler,
-        //...props
-    }
+  return {
+    onLogOutPressed: logOutPressHandler,
+    //...props
+  };
 
 }

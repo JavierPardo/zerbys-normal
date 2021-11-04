@@ -1,4 +1,4 @@
 export const userModel = {
-    name: '',
+  name: "",
 
-}
+};

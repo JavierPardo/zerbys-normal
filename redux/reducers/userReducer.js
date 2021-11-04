@@ -1,17 +1,17 @@
-import { actionTypes } from "../actions/userActions"
+import { actionTypes } from "../actions/userActions";
 
 const initialState = {
-    userId: null
-}
+  userId: null
+};
 
 export default (state = initialState, { type, payload }) => {
     
-    switch (type) {
+  switch (type) {
 
-        case actionTypes.setUser:
-            return { ...state, ...payload }
+  case actionTypes.setUser:
+    return { ...state, ...payload };
 
-        default:
-            return state
-    }
-}
+  default:
+    return state;
+  }
+};
