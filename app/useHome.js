@@ -1,15 +1,12 @@
 import { useNavigation } from "@react-navigation/native";
-import { useState } from "react";
 import routes from "../routes";
 
 export function Home() {
-
   return {};
 }
 
 //navigation action only
 export default function () {
-
   const { ...props } = Home();
 
   const navigation = useNavigation();
@@ -25,7 +22,6 @@ export default function () {
   return {
     onSignInPressed: signInPressHandler,
     onSignUpPressed: signUpPressHandler,
-    ...props
+    ...props,
   };
-
 }

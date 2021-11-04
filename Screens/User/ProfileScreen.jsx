@@ -1,23 +1,24 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
-import { Appbar, Menu, Text } from "react-native-paper";
-import useProfile from "../../app/useProfile";
+import PropTypes from "prop-types";
+import { View } from "react-native";
+import { Text } from "react-native-paper";
 import AppHeader from "../../components/AppHeader";
 
-export function ProfileScreenUI({ user }) {
+function ProfileScreenUI(props) {
+  const { user } = props;
+
   return (
     <View>
-      <AppHeader/>
+      <AppHeader />
       <View style={{ flexDirection: "row" }}>
         <Text>Name:</Text>
-        <Text>{user.name}</Text>
+        {user && <Text>{user.name}</Text>}
       </View>
-    </View>);
+    </View>
+  );
 }
+ProfileScreenUI.propTypes = {
+  user: PropTypes.obj,
+};
 
-export default function () {
-  const profile = useProfile();
-  return <ProfileScreenUI {...profile} />;
-}
-
-const styles = StyleSheet.create({});
+export default ProfileScreenUI;
