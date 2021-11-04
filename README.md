@@ -2,7 +2,7 @@
 
 ## Project setup
 - `npm i`
-- Create a new file called `firebaseConfig.js` in the base directory of the proyect.
+- Create a new file called `firebaseConfig.js` in the base directory of the project.
 - Insert your staging firebase configs into that file. 
 ```
 export const firebaseConfig = {
