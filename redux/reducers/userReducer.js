@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 import { actionTypes } from "../actions/userActions";
 
-const initialState = { userId: null, name: "" };
+const initialState = { userId: null, fullname: "", phone: null, username: null };
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
