@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import AppStack from "./AppStack";
 import AuthStack from "./AuthStack";
 import { NavigationContainer } from "@react-navigation/native";
-import { auth } from "../services/firebase";
 
 function RootStack() {
   const [userInfo, setUserInfo] = useState({ userId: null });
@@ -13,11 +12,11 @@ function RootStack() {
 
   //simulate auth
   useEffect(() => {
-    setUserInfo({ userId: "AhvrHPKvcVYSTvPHUWIfaEi4zoH3" })
+    setUserInfo({ userId: "AhvrHPKvcVYSTvPHUWIfaEi4zoH3" });
     return () => {
 
-    }
-  }, [])
+    };
+  }, []);
 
   return (
     <NavigationContainer>

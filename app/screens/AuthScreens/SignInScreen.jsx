@@ -5,13 +5,13 @@ import { Button, TextInput } from "react-native-paper";
 import useSignIn from "../../js/screens/useSignIn";
 import { containers, controls } from "../../styles";
 
-export function SignInScreen({
+export let SignInScreenUI = ({
   onCancelPressed,
   onSignInPressed,
   onCredentialsChanged,
   identifier,
   password,
-}) {
+}) => {
   return (
     <View style={containers.formContainer}>
       <View style={styles.form}>
@@ -35,12 +35,12 @@ export function SignInScreen({
       </View>
     </View>
   );
-}
+};
 
-export default function () {
+let SignInScreen = () => {
   const signIn = useSignIn();
   return <SignInScreen {...signIn} />;
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -54,10 +54,13 @@ const styles = StyleSheet.create({
   },
 });
 
-SignInScreen.propTypes = {
+SignInScreenUI.propTypes = {
   onCancelPressed: PropTypes.func,
   onSignInPressed: PropTypes.func,
   onCredentialsChanged: PropTypes.func,
   identifier: PropTypes.string,
   password: PropTypes.string,
 };
+
+
+export default SignInScreen;

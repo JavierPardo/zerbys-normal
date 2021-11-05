@@ -5,7 +5,7 @@ import { Button, Text } from "react-native-paper";
 import useInitial from "../js/screens/useInitial";
 import { colors, controls } from "../styles";
 
-export function InitialScreen({ onSignInPressed, onSignUpPressed }) {
+export let InitialScreenUI = ({ onSignInPressed, onSignUpPressed }) => {
   return (
     <View
       style={{
@@ -37,14 +37,16 @@ export function InitialScreen({ onSignInPressed, onSignUpPressed }) {
       </View>
     </View>
   );
-}
+};
 
-export default function () {
+let InitialScreen= () => {
   const initial = useInitial();
-  return <InitialScreen {...initial} />;
-}
+  return <InitialScreenUI {...initial} />;
+};
 
-InitialScreen.propTypes = {
+InitialScreenUI.propTypes = {
   onSignInPressed: PropTypes.func,
   onSignUpPressed: PropTypes.func,
 };
+
+export default InitialScreen;

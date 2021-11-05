@@ -13,7 +13,7 @@ export const FIELDS = {
   email: "email",
   password: "password",
   repassword: "repassword",
-}
+};
 
 export const labels = {
   [FIELDS.phone]: "Phone",
@@ -22,12 +22,12 @@ export const labels = {
   [FIELDS.fullname]: "Fullname",
   [FIELDS.password]: "Password",
   [FIELDS.repassword]: "Repassword",
-}
+};
 
-export function Profile({ user, onUserDataRefresh }) {
+const Profile=({ user }) => {
 
   const [userData, setUserData] = useState({ ...user });
-  const [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState({});
 
   function fieldChangeHandler(name, value) {
     setUserData({ ...userData, [name]: value });
@@ -47,7 +47,7 @@ export function Profile({ user, onUserDataRefresh }) {
         hasErrors = true;
       }
 
-      setErrors({ ...newErrors })
+      setErrors({ ...newErrors });
       hasErrors ? rej() : res();
     });
   }
@@ -55,8 +55,8 @@ export function Profile({ user, onUserDataRefresh }) {
     setUserData({ ...user });
     return function () {
 
-    }
-  }, [user])
+    };
+  }, [user]);
 
   return {
     errors,
@@ -64,12 +64,12 @@ export function Profile({ user, onUserDataRefresh }) {
     onFieldChanged: fieldChangeHandler,
     onFormValidated: formSubmitValidateHandler,
   };
-}
+};
 
 //navigation action only
 export default function () {
   const user = useSelector((state) => state.user);
-  const navigation=useNavigation();
+  const navigation = useNavigation();
   const dispatch = useDispatch();
 
   async function fetchUserDataHandler() {
@@ -93,11 +93,11 @@ export default function () {
 
 
   useEffect(function () {
-    fetchUserDataHandler()
+    fetchUserDataHandler();
     return function () {
 
-    }
-  }, [])
+    };
+  }, []);
 
   const { onFormValidated, ...props } = Profile({
     onUserDataRefresh: fetchUserDataHandler,
@@ -116,28 +116,22 @@ export default function () {
           [FIELDS.phone]: props.user[FIELDS.phone],
           [FIELDS.username]: props.user[FIELDS.username],
         });
-        navigation.navigate(routes.app.home);
+      navigation.navigate(routes.app.home);
     }
     catch (error) {
-console.log(error)
+      console.log(error);
       Alert.alert("Error", JSON.stringify(error));
     }
-  }
-  function saveDataHandler() {
-
   }
 
   function formSubmitHandler() {
     onFormValidated(user)
-      .then(saveDataHandler)
-      .catch(function (error) {
-      })
+      .then(userDataSaveHandler);
   }
 
   return {
     ...props,
     onFormSubmit: formSubmitHandler,
-    onFormSubmit: userDataSaveHandler,
     labels,
   };
 }
