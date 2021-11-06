@@ -14,7 +14,7 @@ let ProfileScreenUI = ({
   errors,
 }) => {
   return (
-    <View style={{ flex: 1 }}>
+    <View style={styles.container}>
       <AppHeader />
       <ZerbysFormList
         labels={labels}
@@ -43,11 +43,11 @@ let ProfileScreenUI = ({
         errors={errors}
         secureTextEntry={true}
       />
-      <View style={{ flexDirection: "row", flex: 1 }}>
-        <Button onPress={onFormSubmit} style={{ flex: 1 }}>
+      <View style={styles.buttonsContainer}>
+        <Button onPress={onFormSubmit} style={styles.container}>
           Cancel
         </Button>
-        <Button onPress={onFormSubmit} style={{ flex: 1 }}>
+        <Button onPress={onFormSubmit} style={styles.container}>
           Submit
         </Button>
       </View>
@@ -68,5 +68,15 @@ let ProfileScreen = () => {
 
   return <ProfileScreen {...propsProfile} />;
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+    flex: 1,
+  },
+});
 
 export default ProfileScreen;

@@ -15,7 +15,7 @@ export let InitialScreenUI = ({ onSignInPressed, onSignUpPressed }) => {
         justifyContent: "space-evenly",
       }}
     >
-      <View style={{}}>
+      <View>
         <Text style={{ fontSize: 80, ...colors.primaryTitle }}>Home</Text>
       </View>
       <View style={{ width: "70%" }}>

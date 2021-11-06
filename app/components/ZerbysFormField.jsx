@@ -15,7 +15,7 @@ export default function ZerbysFormField({
   return (
     <View>
       {errors && errors[field] && (
-        <Text style={{ color: Colors.red400 }}>{errors[field]}</Text>
+        <Text style={styles.error}>{errors[field]}</Text>
       )}
       <Component
         {...props}
@@ -36,3 +36,9 @@ ZerbysFormField.propTypes = {
   data: PropTypes.object,
   props: PropTypes.object,
 };
+
+const styles = StyleSheet.create({
+  error: {
+    color: Colors.red400,
+  },
+});

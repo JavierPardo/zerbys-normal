@@ -28,7 +28,7 @@ export let SignUpScreenUI = ({
           value={password}
           onChangeText={onCredentialsChanged.bind(null, "password")}
         />
-        <View style={{ ...containers.buttons, flexDirection: "row" }}>
+        <View style={styles.buttonsContainer}>
           <Button onPress={onSignUpPressed}>Sign Up</Button>
           <Button onPress={onCancelPressed}>Cancel</Button>
         </View>
@@ -43,6 +43,10 @@ const SignUpScreen = (props) => {
 };
 
 const styles = StyleSheet.create({
+  buttonsContainer: {
+    ...containers.buttons,
+    flexDirection: "row",
+  },
   form: {
     flex: 1,
     width: "80%",
