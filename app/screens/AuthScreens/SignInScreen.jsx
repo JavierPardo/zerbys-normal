@@ -28,7 +28,7 @@ export let SignInScreenUI = ({
           value={password}
           onChangeText={onCredentialsChanged.bind(null, "password")}
         />
-        <View style={ }>
+        <View style={styles.buttonsContainer}>
           <Button onPress={onCancelPressed}>Cancel</Button>
           <Button onPress={onSignInPressed}>Sign In</Button>
         </View>
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   },
   buttonsContainer: {
     ...containers.buttons,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   form: {
     flex: 1,

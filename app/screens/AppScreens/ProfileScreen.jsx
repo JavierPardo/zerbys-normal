@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 import AppHeader from "../../components/AppHeader";
 import ZerbysFormList from "../../components/ZerbysFormList";
@@ -9,10 +9,12 @@ import PropTypes from "prop-types";
 let ProfileScreenUI = ({
   labels,
   onFieldChanged,
-  onFormSubmit,
+  onFormSubmitPressed,
+  onCancelPressed,
   user,
   errors,
 }) => {
+  console.log("screen rendered");
   return (
     <View style={styles.container}>
       <AppHeader />
@@ -44,10 +46,10 @@ let ProfileScreenUI = ({
         secureTextEntry={true}
       />
       <View style={styles.buttonsContainer}>
-        <Button onPress={onFormSubmit} style={styles.container}>
+        <Button onPress={onCancelPressed} style={styles.container}>
           Cancel
         </Button>
-        <Button onPress={onFormSubmit} style={styles.container}>
+        <Button onPress={onFormSubmitPressed} style={styles.container}>
           Submit
         </Button>
       </View>
@@ -58,7 +60,8 @@ let ProfileScreenUI = ({
 ProfileScreenUI.propTypes = {
   labels: PropTypes.object,
   onFieldChanged: PropTypes.func,
-  onFormSubmit: PropTypes.func,
+  onCancelPressed: PropTypes.func,
+  onFormSubmitPressed: PropTypes.func,
   user: PropTypes.object,
   errors: PropTypes.object,
 };
@@ -66,7 +69,7 @@ ProfileScreenUI.propTypes = {
 let ProfileScreen = () => {
   const propsProfile = useProfile();
 
-  return <ProfileScreen {...propsProfile} />;
+  return <ProfileScreenUI {...propsProfile} />;
 };
 
 const styles = StyleSheet.create({

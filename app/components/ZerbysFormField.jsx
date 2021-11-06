@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Colors, Text } from "react-native-paper";
 import PropTypes from "prop-types";
 

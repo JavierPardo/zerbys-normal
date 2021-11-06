@@ -24,9 +24,20 @@ export const labels = {
   [FIELDS.repassword]: "Repassword",
 };
 
-const Profile = ({ user }) => {
+const Profile = ({
+  user,
+  goHome,
+  onUserSaved,
+  onSucess,
+  onUserDataRefresh,
+  onError,
+}) => {
   const [userData, setUserData] = useState({ ...user });
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    onUserDataRefresh();
+  }, []);
 
   function fieldChangeHandler(name, value) {
     setUserData({ ...userData, [name]: value });
@@ -56,24 +67,37 @@ const Profile = ({ user }) => {
       hasErrors ? rej() : res();
     });
   }
+
   useEffect(
     function () {
       setUserData({ ...user });
-      return function () {};
     },
     [user]
   );
+
+  function submitPressHandler() {
+    formSubmitValidateHandler()
+      .then(() => onUserSaved(user))
+      .then(onSucess.bind(null, "Success", "User saved successful."))
+      .then(goHome)
+      .catch(onError.bind(null, "Error"));
+  }
+
+  function cancelPressHandler() {
+    goHome();
+  }
 
   return {
     errors,
     user: userData,
     onFieldChanged: fieldChangeHandler,
-    onFormValidated: formSubmitValidateHandler,
+    onFormSubmitPressed: submitPressHandler,
+    onCancelPressed: cancelPressHandler,
   };
 };
 
 //navigation action only
-export default function () {
+function useProfile() {
   const user = useSelector((state) => state.user);
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -86,6 +110,7 @@ export default function () {
       const { email, phoneNumber } = userProfile;
 
       if (!userProfile.uid) return;
+
       const doc = await firestore
         .collection("users")
         .doc(userProfile.uid)
@@ -101,47 +126,36 @@ export default function () {
         })
       );
     } catch (ex) {
-      console.error(ex);
+      Alert.alert("Error", ex);
     }
   }
 
-  useEffect(function () {
-    fetchUserDataHandler();
-    return function () {};
-  }, []);
+  function userDataSaveHandler(user) {
+    const { userId, ...userData } = user;
+    return firestore
+      .collection("users")
+      .doc(userId)
+      .set({ ...userData });
+  }
 
-  const { onFormValidated, ...props } = Profile({
+  function goHome() {
+    navigation.navigate(routes.app.home);
+  }
+
+  const { ...props } = Profile({
     onUserDataRefresh: fetchUserDataHandler,
+    onError: Alert.alert,
+    onSucess: Alert.alert,
+    onUserSaved: userDataSaveHandler,
+    goHome,
+
     user,
   });
 
-  async function userDataSaveHandler() {
-    const userProfile = auth.currentUser;
-    const { uid } = userProfile;
-    try {
-      await firestore
-        .collection("users")
-        .doc(uid)
-        .set({
-          [FIELDS.email]: props.user[FIELDS.email],
-          [FIELDS.fullname]: props.user[FIELDS.fullname],
-          [FIELDS.phone]: props.user[FIELDS.phone],
-          [FIELDS.username]: props.user[FIELDS.username],
-        });
-      navigation.navigate(routes.app.home);
-    } catch (error) {
-      console.log(error);
-      Alert.alert("Error", JSON.stringify(error));
-    }
-  }
-
-  function formSubmitHandler() {
-    onFormValidated(user).then(userDataSaveHandler);
-  }
-
   return {
     ...props,
-    onFormSubmit: formSubmitHandler,
     labels,
   };
 }
+
+export default useProfile;
