@@ -24,8 +24,7 @@ export const labels = {
   [FIELDS.repassword]: "Repassword",
 };
 
-const Profile=({ user }) => {
-
+const Profile = ({ user }) => {
   const [userData, setUserData] = useState({ ...user });
   const [errors, setErrors] = useState({});
 
@@ -38,12 +37,18 @@ const Profile=({ user }) => {
       let newErrors = {};
       let hasErrors = false;
       if (userData[FIELDS.password] !== userData[FIELDS.repassword]) {
-        newErrors = { ...newErrors, [FIELDS.repassword]: "Password does not match." };
+        newErrors = {
+          ...newErrors,
+          [FIELDS.repassword]: "Password does not match.",
+        };
         hasErrors = true;
       }
 
       if (!userData[FIELDS.username]) {
-        newErrors = { ...newErrors, [FIELDS.username]: "Username cannot be empty." };
+        newErrors = {
+          ...newErrors,
+          [FIELDS.username]: "Username cannot be empty.",
+        };
         hasErrors = true;
       }
 
@@ -51,12 +56,13 @@ const Profile=({ user }) => {
       hasErrors ? rej() : res();
     });
   }
-  useEffect(function () {
-    setUserData({ ...user });
-    return function () {
-
-    };
-  }, [user]);
+  useEffect(
+    function () {
+      setUserData({ ...user });
+      return function () {};
+    },
+    [user]
+  );
 
   return {
     errors,
@@ -80,23 +86,28 @@ export default function () {
       const { email, phoneNumber } = userProfile;
 
       if (!userProfile.uid) return;
-      const doc = await firestore.collection("users")
-        .doc(userProfile.uid).get();
+      const doc = await firestore
+        .collection("users")
+        .doc(userProfile.uid)
+        .get();
 
-      dispatch(setUser({ userId: doc.id, loaded: true, email, phoneNumber, ...doc.data() }));
-
+      dispatch(
+        setUser({
+          userId: doc.id,
+          loaded: true,
+          email,
+          phoneNumber,
+          ...doc.data(),
+        })
+      );
     } catch (ex) {
       console.error(ex);
     }
   }
 
-
-
   useEffect(function () {
     fetchUserDataHandler();
-    return function () {
-
-    };
+    return function () {};
   }, []);
 
   const { onFormValidated, ...props } = Profile({
@@ -105,28 +116,27 @@ export default function () {
   });
 
   async function userDataSaveHandler() {
-
     const userProfile = auth.currentUser;
     const { uid } = userProfile;
     try {
-      await firestore.collection("users")
-        .doc(uid).set({
+      await firestore
+        .collection("users")
+        .doc(uid)
+        .set({
           [FIELDS.email]: props.user[FIELDS.email],
           [FIELDS.fullname]: props.user[FIELDS.fullname],
           [FIELDS.phone]: props.user[FIELDS.phone],
           [FIELDS.username]: props.user[FIELDS.username],
         });
       navigation.navigate(routes.app.home);
-    }
-    catch (error) {
+    } catch (error) {
       console.log(error);
       Alert.alert("Error", JSON.stringify(error));
     }
   }
 
   function formSubmitHandler() {
-    onFormValidated(user)
-      .then(userDataSaveHandler);
+    onFormValidated(user).then(userDataSaveHandler);
   }
 
   return {

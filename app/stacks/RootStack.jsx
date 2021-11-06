@@ -13,9 +13,7 @@ function RootStack() {
   //simulate auth
   useEffect(() => {
     setUserInfo({ userId: "AhvrHPKvcVYSTvPHUWIfaEi4zoH3" });
-    return () => {
-
-    };
+    return () => {};
   }, []);
 
   return (

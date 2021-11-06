@@ -62,5 +62,4 @@ SignInScreenUI.propTypes = {
   password: PropTypes.string,
 };
 
-
 export default SignInScreen;

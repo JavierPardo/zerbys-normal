@@ -39,7 +39,7 @@ export let InitialScreenUI = ({ onSignInPressed, onSignUpPressed }) => {
   );
 };
 
-let InitialScreen= () => {
+let InitialScreen = () => {
   const initial = useInitial();
   return <InitialScreenUI {...initial} />;
 };
