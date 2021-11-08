@@ -1,9 +1,11 @@
 # ZERBYZ
 
 ## Project setup
+
 - `npm i`
 - Create a new file called `firebaseConfig.js` in the base directory of the project.
-- Insert your staging firebase configs into that file. 
+- Insert your staging firebase configs into that file.
+
 ```
 export const firebaseConfig = {
     apiKey: "API_KEY",
@@ -16,4 +18,5 @@ export const firebaseConfig = {
     measurementId: "G-MEASUREMENT_ID",
 };
 ```
+
 - `expo start`

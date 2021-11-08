@@ -18,11 +18,9 @@ export function SignUp() {
   }
 
   function signUpPressHandler() {
-    console.log("userCredential");
     return auth
       .createUserWithEmailAndPassword(credentials.email, credentials.password)
       .then((userCredential) => {
-        console.log("userCredential2");
         const user = userCredential.user;
         const userRef = firestore.collection("users").doc(user.uid);
         userRef.set(userModel);

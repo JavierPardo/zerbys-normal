@@ -5,13 +5,13 @@ import { Button, TextInput } from "react-native-paper";
 import useSignIn from "../../js/screens/useSignIn";
 import { containers, controls } from "../../styles";
 
-export function SignInScreen({
+export let SignInScreenUI = ({
   onCancelPressed,
   onSignInPressed,
   onCredentialsChanged,
   identifier,
   password,
-}) {
+}) => {
   return (
     <View style={containers.formContainer}>
       <View style={styles.form}>
@@ -28,25 +28,28 @@ export function SignInScreen({
           value={password}
           onChangeText={onCredentialsChanged.bind(null, "password")}
         />
-        <View style={{ ...containers.buttons, flexDirection: "row" }}>
+        <View style={styles.buttonsContainer}>
           <Button onPress={onCancelPressed}>Cancel</Button>
           <Button onPress={onSignInPressed}>Sign In</Button>
         </View>
       </View>
     </View>
   );
-}
+};
 
-export default function () {
+let SignInScreen = () => {
   const signIn = useSignIn();
   return <SignInScreen {...signIn} />;
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
   },
-
+  buttonsContainer: {
+    ...containers.buttons,
+    flexDirection: "row",
+  },
   form: {
     flex: 1,
     width: "80%",
@@ -54,10 +57,12 @@ const styles = StyleSheet.create({
   },
 });
 
-SignInScreen.propTypes = {
+SignInScreenUI.propTypes = {
   onCancelPressed: PropTypes.func,
   onSignInPressed: PropTypes.func,
   onCredentialsChanged: PropTypes.func,
   identifier: PropTypes.string,
   password: PropTypes.string,
 };
+
+export default SignInScreen;

@@ -17,23 +17,23 @@ function AppStack() {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
           switch (route.name) {
-          case routes.app.home:
-            iconName = focused ? "home" : "home-outline";
-            break;
-          case routes.app.workers:
-            iconName = focused ? "hammer" : "hammer-outline";
-            break;
-          case routes.app.add:
-            iconName = focused ? "add-circle" : "add-circle-outline";
-            break;
-          case routes.app.inbox:
-            iconName = focused
-              ? "chatbox-ellipses"
-              : "chatbox-ellipses-outline";
-            break;
-          case routes.app.profile:
-            iconName = focused ? "person-circle" : "person-circle-outline";
-            break;
+            case routes.app.home:
+              iconName = focused ? "home" : "home-outline";
+              break;
+            case routes.app.workers:
+              iconName = focused ? "hammer" : "hammer-outline";
+              break;
+            case routes.app.add:
+              iconName = focused ? "add-circle" : "add-circle-outline";
+              break;
+            case routes.app.inbox:
+              iconName = focused
+                ? "chatbox-ellipses"
+                : "chatbox-ellipses-outline";
+              break;
+            case routes.app.profile:
+              iconName = focused ? "person-circle" : "person-circle-outline";
+              break;
           }
           return <Ionicons name={iconName} size={size} color={color} />;
         },
