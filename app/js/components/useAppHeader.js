@@ -11,6 +11,5 @@ export default function () {
 
   return {
     onLogOutPressed: logOutPressHandler,
-    //...props
   };
 }

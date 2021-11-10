@@ -43,7 +43,8 @@ function EditJobGeneralUI({ general, errors, onFieldChanged }) {
           onConfirm={onFieldChanged.bind(null, FIELDS.date)}
         />
       </View>
-      <View style={{ flex: 1 }}>{/*NOT IMPORTANTE THIS IS TEMPORAL WHILE WORKING ON WIZZARD*/}
+        {/*NOT IMPORTANTE THIS IS TEMPORAL WHILE WORKING ON WIZZARD*/}
+      <View style={{ flex: 1 }}>
         <TouchableOpacity onPress={() => console.log(general)}>
           <Text>Continue</Text>
         </TouchableOpacity>

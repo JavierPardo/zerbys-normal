@@ -7,7 +7,6 @@ import WorkersScreen from "../screens/AppScreens/WorkersScreen";
 import AddScreen from "../screens/AppScreens/AddScreen";
 import InboxScreen from "../screens/AppScreens/InboxScreen";
 import ProfileScreen from "../screens/AppScreens/ProfileScreen";
-import EditJobGeneral from "../screens/AppScreens/JobForm/EditJobGeneral";
 
 function AppStack() {
   const TabStack = createBottomTabNavigator();
@@ -43,7 +42,7 @@ function AppStack() {
         tabBarInactiveTintColor: "gray",
       })}
     >
-      <TabStack.Screen name={routes.app.home} component={EditJobGeneral} />
+      <TabStack.Screen name={routes.app.home} component={HomeScreen} />
       <TabStack.Screen name={routes.app.workers} component={WorkersScreen} />
       <TabStack.Screen name={routes.app.add} component={AddScreen} />
       <TabStack.Screen name={routes.app.inbox} component={InboxScreen} />
