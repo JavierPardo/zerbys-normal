@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { auth } from "../../services/firebase";
 import { setUserId } from "../../../redux/actions/userActions";
 
-export function SignIn() {
+export function SignIn({ onSignInWithEmailProcess }) {
   const [credentials, setCredentials] = useState({
     identifier: "",
     password: "",
@@ -17,8 +17,10 @@ export function SignIn() {
   }
 
   function signInByEmailAndPassword() {
-    return auth
-      .signInWithEmailAndPassword(credentials.identifier, credentials.password)
+    return onSignInWithEmailProcess({
+      email: credentials.identifier,
+      password: credentials.password,
+    })
       .then((userCredential) => {
         const user = userCredential.user;
         dispatch(setUserId(user.uid));
@@ -46,26 +48,32 @@ export function SignIn() {
   return {
     ...credentials,
     onCredentialsChanged: credentialsChangeHandler,
-    onSignInValidation: signInValidation,
+    onSignInPressed: signInValidation,
   };
 }
 
 //navigation action only
 export default function () {
-  const { onSignInValidation, ...props } = SignIn();
-
   const navigation = useNavigation();
 
   function cancelPressHandler() {
     navigation.goBack();
   }
 
-  function signInPressHandler() {
-    onSignInValidation().then(function () {});
+  function signInWithEmailHandler({ email, password }) {
+    return auth.signInWithEmailAndPassword(email, password);
+    // .then((userCredential) => {
+
+    // })
+    // .catch((error) => {
+    // });
   }
 
+  const { ...props } = SignIn({
+    onSignInWithEmailProcess: signInWithEmailHandler,
+  });
+
   return {
-    onSignInPressed: signInPressHandler,
     onCancelPressed: cancelPressHandler,
     ...props,
   };

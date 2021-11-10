@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import AppStack from "./AppStack";
 import AuthStack from "./AuthStack";
 import { NavigationContainer } from "@react-navigation/native";
+import { enGB, registerTranslation } from "react-native-paper-dates";
 
 function RootStack() {
   const [userInfo, setUserInfo] = useState({ userId: null });

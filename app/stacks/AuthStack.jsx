@@ -16,8 +16,8 @@ function AuthStack() {
       initialRouteName={routes.auth.initial}
     >
       <RootStack.Screen name={routes.auth.initial} component={InitialScreen} />
-      <RootStack.Screen name={routes.auth.signIn} component={SignUpScreen} />
-      <RootStack.Screen name={routes.auth.signUp} component={SignInScreen} />
+      <RootStack.Screen name={routes.auth.signUp} component={SignUpScreen} />
+      <RootStack.Screen name={routes.auth.signIn} component={SignInScreen} />
     </RootStack.Navigator>
   );
 }

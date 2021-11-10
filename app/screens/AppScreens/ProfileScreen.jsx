@@ -14,7 +14,6 @@ let ProfileScreenUI = ({
   user,
   errors,
 }) => {
-  console.log("screen rendered");
   return (
     <View style={styles.container}>
       <AppHeader />

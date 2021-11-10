@@ -15,6 +15,13 @@ export const FIELDS = {
   repassword: "repassword",
 };
 
+export const USER_PROFILE_FIELDS = {
+  phone: "phoneNumber",
+  displayName: "displayName",
+  email: "email",
+  username: "username",
+  password: "password",
+};
 export const labels = {
   [FIELDS.phone]: "Phone",
   [FIELDS.email]: "Email",
@@ -30,6 +37,7 @@ const Profile = ({
   onUserSaved,
   onSucess,
   onUserDataRefresh,
+  onProfileUpdated,
   onError,
 }) => {
   const [userData, setUserData] = useState({ ...user });
@@ -75,9 +83,30 @@ const Profile = ({
     [user]
   );
 
+  function mapUserDataToUserProfile() {
+    const userProfile = {};
+    if (userData[FIELDS.fullname] !== user[FIELDS.fullname])
+      userProfile[USER_PROFILE_FIELDS.displayName] = userData[FIELDS.fullname];
+
+    if (userData[FIELDS.phone] !== user[FIELDS.phone])
+      userProfile[USER_PROFILE_FIELDS.phone] = userData[FIELDS.phone];
+
+    if (userData[FIELDS.username] !== user[FIELDS.username])
+      userProfile[USER_PROFILE_FIELDS.username] = userData[FIELDS.username];
+
+    if (userData[FIELDS.email] !== user[FIELDS.email])
+      userProfile[USER_PROFILE_FIELDS.email] = userData[FIELDS.email];
+
+    if (userData[FIELDS.password])
+      userProfile[USER_PROFILE_FIELDS.password] = userData[FIELDS.password];
+    return userProfile;
+  }
+
   function submitPressHandler() {
-    formSubmitValidateHandler()
-      .then(() => onUserSaved(user))
+    return formSubmitValidateHandler()
+      .then(onUserSaved.bind(null, userData))
+      .then(mapUserDataToUserProfile)
+      .then(onProfileUpdated)
       .then(onSucess.bind(null, "Success", "User saved successful."))
       .then(goHome)
       .catch(onError.bind(null, "Error"));
@@ -103,10 +132,13 @@ function useProfile() {
   const dispatch = useDispatch();
 
   async function fetchUserDataHandler() {
+    const profileUser = auth.currentUser;
     if (user.loaded) return;
 
     try {
       const userProfile = auth.currentUser;
+      if (!userProfile) return;
+
       const { email, phoneNumber } = userProfile;
 
       if (!userProfile.uid) return;
@@ -126,7 +158,7 @@ function useProfile() {
         })
       );
     } catch (ex) {
-      Alert.alert("Error", ex);
+      Alert.alert("Error", JSON.stringify(ex));
     }
   }
 
@@ -142,11 +174,22 @@ function useProfile() {
     navigation.navigate(routes.app.home);
   }
 
+  function profileUpdateHandler(userProfile) {
+    const currentUser = auth.currentUser;
+    const { password, ...userProfileData } = userProfile;
+    currentUser.updateProfile({ ...userProfileData });
+    //do it later
+    //currentUser.updatePhoneNumber({ [USER_PROFILE_FIELDS.phone]: currentUser[phone] })
+    userProfile[USER_PROFILE_FIELDS.password] &&
+      currentUser.updatePassword(userProfile[USER_PROFILE_FIELDS.password]);
+  }
+
   const { ...props } = Profile({
     onUserDataRefresh: fetchUserDataHandler,
-    onError: Alert.alert,
+    onError: (error) => Alert.alert(JSON.stringify(error)),
     onSucess: Alert.alert,
     onUserSaved: userDataSaveHandler,
+    onProfileUpdated: profileUpdateHandler,
     goHome,
 
     user,
