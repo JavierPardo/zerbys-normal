@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyleSheet, View } from "react-native";
-import { Button, TextInput } from "react-native-paper";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { Text, TextInput } from "react-native-paper";
 import useSignIn from "../../js/screens/useSignIn";
 import { containers, controls } from "../../styles";
 
@@ -29,8 +29,12 @@ export let SignInScreenUI = ({
           onChangeText={onCredentialsChanged.bind(null, "password")}
         />
         <View style={styles.buttonsContainer}>
-          <Button onPress={onCancelPressed}>Cancel</Button>
-          <Button onPress={onSignInPressed}>Sign In</Button>
+          <TouchableOpacity onPress={onCancelPressed}>
+            <Text>Cancel</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={onSignInPressed}>
+            <Text>Sign In</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -38,8 +42,8 @@ export let SignInScreenUI = ({
 };
 
 let SignInScreen = () => {
-  const signIn = useSignIn();
-  return <SignInScreen {...signIn} />;
+  const signInProps = useSignIn();
+  return <SignInScreenUI {...signInProps} />;
 };
 
 const styles = StyleSheet.create({
@@ -49,6 +53,7 @@ const styles = StyleSheet.create({
   buttonsContainer: {
     ...containers.buttons,
     flexDirection: "row",
+    justifyContent: "space-evenly",
   },
   form: {
     flex: 1,

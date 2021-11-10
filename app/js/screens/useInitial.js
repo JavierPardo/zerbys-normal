@@ -12,11 +12,11 @@ export default function () {
   const navigation = useNavigation();
 
   function signInPressHandler() {
-    navigation.navigate(routes.public.signIn);
+    navigation.navigate(routes.auth.signIn);
   }
 
   function signUpPressHandler() {
-    navigation.navigate(routes.public.signUp);
+    navigation.navigate(routes.auth.signUp);
   }
 
   return {
